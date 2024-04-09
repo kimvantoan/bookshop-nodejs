@@ -24,7 +24,7 @@ export const verify=(req,res,next)=>{
 
 export const isAdmin=(req,res,next)=>{
     verify(req,res,()=>{
-        if(req.user.role){
+        if(req.user.role|| req.user.id===req.params.id){
             next()
         }
         else{

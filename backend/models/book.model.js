@@ -1,11 +1,11 @@
 import mongoose  from "mongoose";
 
 const bookSchema=new mongoose.Schema({
-    name:{
+    bookTitle:{
         type:String,
         require:true
     },
-    title:{
+    authorName:{
         type:String,
         require:true
     },
@@ -17,9 +17,13 @@ const bookSchema=new mongoose.Schema({
         type:String,
         require:true
     },
-    image:{
+    imageURL:{
         type:String,
         require:true
     },
+    category:{
+        type:String,
+        require:true
+    }
 },{timestamps:true})
 export default mongoose.model('Book',bookSchema)
