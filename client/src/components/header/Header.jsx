@@ -10,13 +10,10 @@ const Header = () => {
             <Link to="/">KIMTOAN</Link>
           </li>
           <li>
-            <a href="#">Blog</a>
+            <Link to='/product'>Products</Link>
           </li>
           <li>
-            <a href="#">Products</a>
-          </li>
-          <li>
-            <a href="#">About</a>
+            <Link to='/about' href="#">About</Link>
           </li>
           <li>
             <a href="#">Forum</a>
