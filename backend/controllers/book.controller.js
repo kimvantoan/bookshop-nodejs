@@ -39,7 +39,7 @@ export const createBook = async (req, res) => {
 export const getAllBook = async (req, res) => {
   try {
     const allBook = await Book.find();
-    res.send({ message: "tat ca sach", success: true, allBook });
+    res.send(allBook);
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong" });
@@ -49,7 +49,7 @@ export const getSingleBook = async (req, res) => {
   try {
     const { id } = req.params;
     const book = await Book.findById(id);
-    res.send({ success: true, book });
+    res.send(book);
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong", success: false });

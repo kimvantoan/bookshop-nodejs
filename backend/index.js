@@ -13,9 +13,11 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/book", bookRoute);
+
 
 app.listen(2003, () => {
   console.log("app is running port 2003");
