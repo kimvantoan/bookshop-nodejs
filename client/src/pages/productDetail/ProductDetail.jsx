@@ -4,16 +4,15 @@ import axios from "axios";
 import Layout from "../../components/layout/Layout";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
-
+import { toast } from "react-toastify";
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetail() {
+export default function ProductDetail({cartitem,setCartitem}) {
   const { id } = useParams();
-  console.log("id:", id);
   const [product, setProduct] = useState({});
   useEffect(() => {
     axios
@@ -21,7 +20,11 @@ export default function ProductDetail() {
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(product);
+  const handleAddToCart=(e)=>{
+    e.preventDefault()
+    setCartitem([...cartitem,product])
+    toast.success("đã thêm sản phẩm vào giỏ hàng")
+  }
   return (
     <Layout>
       <Link to='/product' className="flex">
@@ -85,14 +88,15 @@ export default function ProductDetail() {
               </div>
 
               <form className="mt-10">
-                <button
+                <Link to='/cart'
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-3 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Buy now
-                </button>
+                </Link>
                 <button
                   type="submit"
+                  onClick={handleAddToCart}
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to bag

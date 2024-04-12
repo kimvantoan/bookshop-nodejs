@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Register from "./pages/register/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +9,9 @@ import About from "./pages/about/About.jsx";
 import Pagenotfound from "./pages/404_page/404_page.jsx";
 import Product from "./pages/product/Product.jsx";
 import ProductDetail from "./pages/productDetail/ProductDetail.jsx";
+import Cart from "./pages/cart/Cart.jsx";
 const App = () => {
+  const [cartitem, setCartitem] = useState([])
   return (
     <>
       <Routes>
@@ -18,7 +20,8 @@ const App = () => {
         <Route path="/login" element={<Login/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/product" element={<Product/>}/>
-        <Route path="/product/:id" element={<ProductDetail/>}/>
+        <Route path="/cart" element={<Cart cartitem={cartitem}/>}/>
+        <Route path="/product/:id" element={<ProductDetail cartitem={cartitem} setCartitem={setCartitem}/>}/>
         <Route path="*" element={<Pagenotfound/>}/>
       </Routes>
       <ToastContainer />
