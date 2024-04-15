@@ -6,8 +6,8 @@ import  {verify,isAdmin} from '../middleware/veryfi.js'
 
 router.get('/allBook',getAllBook)
 router.get('/:id',getSingleBook)
-router.put('/updateBook/:id',isAdmin,updateBook)
-router.delete('/deleteBook/:id',isAdmin,deleteBook)
-router.post('/createBook',isAdmin,createBook)
+router.put('/updateBook/:id',updateBook)
+router.delete('/deleteBook/:id',deleteBook)
+router.post('/createBook',createBook)
 
 export default router

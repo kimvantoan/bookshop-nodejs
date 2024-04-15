@@ -21,9 +21,5 @@ const bookSchema=new mongoose.Schema({
         type:String,
         require:true
     },
-    category:{
-        type:String,
-        require:true
-    }
 },{timestamps:true})
 export default mongoose.model('Book',bookSchema)

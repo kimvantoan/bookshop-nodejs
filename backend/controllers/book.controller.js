@@ -19,16 +19,13 @@ export const createBook = async (req, res) => {
     if (!imageURL) {
       return res.send({ message: "fill out imageURL", success: false });
     }
-    if (!category) {
-      return res.send({ message: "fill out category", success: false });
-    }
     const book = await Book.create({
       bookTitle: bookTitle,
       authorName: authorName,
       description: description,
       price: price,
       imageURL: imageURL,
-      category: category,
+     
     });
     res.send({ message: "da them mot sach moi", success: true });
   } catch (error) {
@@ -58,7 +55,7 @@ export const getSingleBook = async (req, res) => {
 export const updateBook = async (req, res) => {
   try {
     const { id } = req.params;
-    const { bookTitle, authorName, description, price, imageURL, category } =
+    const { bookTitle, authorName, description, price, imageURL } =
       req.body;
     await Book.findByIdAndUpdate(id, {
       bookTitle: bookTitle,
@@ -66,7 +63,7 @@ export const updateBook = async (req, res) => {
       description: description,
       price: price,
       imageURL: imageURL,
-      category: category,
+     
     });
     res.send({ message: "update sach thanh cong", success: true });
   } catch (error) {
