@@ -3,6 +3,7 @@ import HeaderAdmin from "../../../components/HeaderAdmin";
 import axios from "axios";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Book = () => {
   const [books, setBook] = useState([]);
@@ -12,10 +13,31 @@ const Book = () => {
       .then((res) => setBook(res.data))
       .catch((err) => console.log(err));
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await axios
+        .delete(`http://localhost:2003/book/deleteBook/${id}`)
+        .then((res) => {
+          if (res.data.success) {
+            toast.success(res.data.message);
+            window.location.reload()
+          } else {
+            toast.error(res.data.message);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <HeaderAdmin />
-      <Link to="/dashBoard/book/create" className="px-2 py-3 bg-blue-600 text-white rounded ml-36">New Book</Link>
+      <Link
+        to="/dashBoard/book/createBook"
+        className="px-2 py-3 bg-blue-600 text-white rounded ml-36"
+      >
+        New Book
+      </Link>
       <ul role="list" className="divide-y divide-gray-100 px-36">
         {books.map((book) => (
           <li className="flex justify-between gap-x-6 py-5">
@@ -35,8 +57,13 @@ const Book = () => {
               </div>
             </div>
             <div className=" shrink-0 sm:flex sm:flex-row sm:items-end gap-6">
-              <PencilSquareIcon class="h-8 w-8 text-blue-500 cursor-pointer" />
-              <TrashIcon class="h-8 w-8 text-red-500 cursor-pointer" />
+              <Link to={`/dashBoard/book/updateBook/${book._id}`}>
+                <PencilSquareIcon class="h-8 w-8 text-blue-500 cursor-pointer" />
+              </Link>
+              <TrashIcon
+                onClick={()=>handleDelete(book._id)}
+                class="h-8 w-8 text-red-500 cursor-pointer"
+              />
             </div>
           </li>
         ))}

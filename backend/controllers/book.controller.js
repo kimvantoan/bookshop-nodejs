@@ -63,9 +63,8 @@ export const updateBook = async (req, res) => {
       description: description,
       price: price,
       imageURL: imageURL,
-     
     });
-    res.send({ message: "update sach thanh cong", success: true });
+    res.send({ message: "cap nhat sach thanh cong", success: true });
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong", success: false });

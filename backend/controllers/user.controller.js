@@ -4,7 +4,7 @@ export const getAllUser = async (req, res) => {
   try {
     const users = await Users.find();
     if (users.length>=1) {
-      res.send({ message: "tat ca user", success: true, users });
+      res.send(users);
     } else {
       return res.send({ message: "chua co user nao", success: true });
     }

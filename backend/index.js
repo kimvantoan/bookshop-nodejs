@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use("/auth", authRoute);
-app.use("/dashBoard/user", userRoute);
+app.use("/user", userRoute);
 app.use("/book", bookRoute);
 
 

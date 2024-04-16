@@ -12,7 +12,9 @@ import ProductDetail from "./pages/productDetail/ProductDetail.jsx";
 import Cart from "./pages/cart/Cart.jsx";
 import Dashboard from "./pages/admin/dashBoard/DashBoard.jsx";
 import Book from "./pages/admin/book/Book.jsx";
-import CreateBook from "./pages/admin/book/CreateBook.jsx";
+import CreateBook from "./components/actionBook/CreateBook.jsx";
+import User from "./pages/admin/user/User.jsx";
+import EditBook from "./components/actionBook/EditBook.jsx";
 const App = () => {
   const [cartitem, setCartitem] = useState([])
   return (
@@ -28,7 +30,10 @@ const App = () => {
         <Route path="*" element={<Pagenotfound/>}/>
         <Route path="/dashBoard" element={<Dashboard/>}/>
         <Route path="/dashBoard/book" element={<Book/>}/>
-        <Route path="/dashBoard/book/create" element={<CreateBook/>}/>
+        <Route path="/dashBoard/book/createBook" element={<CreateBook/>}/>
+        <Route path="/dashBoard/book/updateBook/:id" element={<EditBook/>}/>
+        <Route path="/dashBoard/user" element={<User/>}/>
+
       </Routes>
       <ToastContainer />
     </>

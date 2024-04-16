@@ -20,11 +20,11 @@ export default function ProductDetail({cartitem,setCartitem}) {
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, []);
-  const handleAddToCart=(e)=>{
-    e.preventDefault()
-    setCartitem([...cartitem,product])
-    toast.success("đã thêm sản phẩm vào giỏ hàng")
-  }
+    const handleAddToCart=(e)=>{
+      e.preventDefault()
+      setCartitem([...cartitem,product])
+      toast.success("đã thêm sản phẩm vào giỏ hàng")
+    }
   return (
     <Layout>
       <Link to='/product' className="flex">

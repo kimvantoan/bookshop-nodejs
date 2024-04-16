@@ -3,10 +3,10 @@ import {getAllUser,getSingleUser,updateUser,deleteUser} from '../controllers/use
 import  {isAdmin} from '../middleware/veryfi.js'
 const router=express.Router()
 
-router.get('/allUser',isAdmin,getAllUser)
-router.get('/singleUser/:id',isAdmin,getSingleUser)
-router.put('/updateUser/:id',isAdmin,updateUser)
-router.delete('/deleteUser/:id',isAdmin,deleteUser)
+router.get('/allUser',getAllUser)
+router.get('/singleUser/:id',getSingleUser)
+router.put('/updateUser/:id',updateUser)
+router.delete('/deleteUser/:id',deleteUser)
 
 export default router
 
