@@ -19,7 +19,7 @@ const Book = () => {
         .delete(`http://localhost:2003/book/deleteBook/${id}`)
         .then((res) => {
           if (res.data.success) {
-            toast.success(res.data.message);
+            // toast.success(res.data.message);
             window.location.reload()
           } else {
             toast.error(res.data.message);
@@ -52,7 +52,10 @@ const Book = () => {
                   {book.bookTitle}
                 </p>
                 <p className="mt-1 truncate text-sm  leading-5 text-gray-500">
-                  {book.price}
+                  {Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  }).format(book.price)}
                 </p>
               </div>
             </div>

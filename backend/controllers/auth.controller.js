@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
-    if (!name) {
+    const { username, email, password, phone } = req.body;
+    if (!username) {
       return res.send({ message: "fill out username",success:false });
     }
     if (!email) {
@@ -24,7 +24,7 @@ export const register = async (req, res) => {
     const saltRounds = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, saltRounds);
     const user = await Users.create({
-      username: name,
+      username: username,
       email: email,
       password: hashed,
       phone: phone,

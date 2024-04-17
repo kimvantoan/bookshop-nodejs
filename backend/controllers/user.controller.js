@@ -6,7 +6,7 @@ export const getAllUser = async (req, res) => {
     if (users.length>=1) {
       res.send(users);
     } else {
-      return res.send({ message: "chua co user nao", success: true });
+      return res.send({ message: "chua co user nao", success: false });
     }
   } catch (error) {
     console.log(error);
@@ -42,9 +42,9 @@ export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     await Users.findByIdAndDelete(id);
-    res.send({ message: "xoa thanh cong", seccess: true });
+    res.send({ message: "xoa thanh cong", success: true });
   } catch (error) {
     console.log(error);
-    return res.send({ message: "something is wrong" });
+    return res.send({ message: "something is wrong",success:false });
   }
 };
