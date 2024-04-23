@@ -2,32 +2,31 @@ import Book from "../models/book.model.js";
 
 export const createBook = async (req, res) => {
   try {
-    const { bookTitle, authorName, description, price, imageURL, category } =
+    const { bookTitle, authorName, description, price:{originalPrice, currentPrice}, imageURL,publish:{publisher,publishDate} ,pageCount,form } =
       req.body;
     if (!bookTitle) {
       return res.send({ message: "fill out bookTitle", success: false });
     }
-    if (!authorName) {
-      return res.send({ message: "fill out authorName", success: false });
+    if (!originalPrice) {
+      return res.send({ message: "fill out originalPrice", success: false });
     }
-    if (!description) {
-      return res.send({ message: "fill out description", success: false });
-    }
-    if (!price) {
-      return res.send({ message: "fill out price", success: false });
-    }
+    // if (!currentPrice) {
+    //   return res.send({ message: "fill out currentPrice", success: false });
+    // }
     if (!imageURL) {
       return res.send({ message: "fill out imageURL", success: false });
     }
-    const book = await Book.create({
+    await Book.create({
       bookTitle: bookTitle,
       authorName: authorName,
       description: description,
-      price: price,
+      price:{originalPrice,currentPrice},
       imageURL: imageURL,
-     
+      publish:{publisher,publishDate},
+      pageCount:pageCount,
+      form:form
     });
-    res.send({ message: "da them mot sach moi", success: true });
+    res.send({ message: "đã thêm một sách mới", success: true });
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong", success: false });
@@ -64,7 +63,7 @@ export const updateBook = async (req, res) => {
       price: price,
       imageURL: imageURL,
     });
-    res.send({ message: "cap nhat sach thanh cong", success: true });
+    res.send({ message: "cập nhật sách thành công", success: true });
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong", success: false });
@@ -74,7 +73,7 @@ export const deleteBook = async (req, res) => {
   try {
     const { id } = req.params;
     await Book.findByIdAndDelete(id);
-    res.send({ message: "xoa thanh cong", success: true });
+    res.send({ message: "xóa sách thành công", success: true });
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong", success: false });

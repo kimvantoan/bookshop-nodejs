@@ -13,10 +13,6 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/',(req,res)=>{
-  
-})
-
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/book", bookRoute);

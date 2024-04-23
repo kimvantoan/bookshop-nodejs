@@ -5,9 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Routes,Route } from "react-router-dom";
 import Login from "./pages/login/Login.jsx";
 import Home from './pages/home/Home.jsx'
-import About from "./pages/about/About.jsx";
 import Pagenotfound from "./pages/404_page/404_page.jsx";
-import Product from "./pages/product/Product.jsx";
 import ProductDetail from "./pages/productDetail/ProductDetail.jsx";
 import Cart from "./pages/cart/Cart.jsx";
 import Dashboard from "./pages/admin/dashBoard/DashBoard.jsx";
@@ -21,13 +19,13 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/signin" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/product" element={<Product/>}/>
         <Route path="/cart" element={<Cart cartitem={cartitem}/>}/>
         <Route path="/product/:id" element={<ProductDetail cartitem={cartitem} setCartitem={setCartitem}/>}/>
+
         <Route path="*" element={<Pagenotfound/>}/>
+
         <Route path="/dashBoard" element={<Dashboard/>}/>
         <Route path="/dashBoard/book" element={<Book/>}/>
         <Route path="/dashBoard/book/createBook" element={<CreateBook/>}/>

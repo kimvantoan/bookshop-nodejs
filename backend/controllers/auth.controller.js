@@ -19,7 +19,7 @@ export const register = async (req, res) => {
     }
     const validEmail = await Users.findOne({ email: email });
     if (validEmail) {
-      return res.send({ message: "tai khoan da ton tai", success: false });
+      return res.send({ message: "tài khoản đã tồn tại", success: false });
     }
     const saltRounds = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, saltRounds);
@@ -29,7 +29,7 @@ export const register = async (req, res) => {
       password: hashed,
       phone: phone,
     });
-    res.send({ message: "tao tai khoan thanh cong",success:true});
+    res.send({ message: "tạo tài khoản thành công",success:true});
   } catch (error) {
     console.log(error);
     return res.send({ message: "something is wrong" });
@@ -48,13 +48,13 @@ export const login = async (req, res) => {
     const validEmail = await Users.findOne({ email: email });
     if (!validEmail) {
       return res.send({
-        message: "tai khoan chua duoc dang ki",
+        message: "tài khoản chưa được đăng kí",
         success: false,
       });
     }
     const match = await bcrypt.compare(password, validEmail.password);
     if (!match) {
-      return res.send({ message: "mat khau khong chinh xac", success: false });
+      return res.send({ message: "mật khẩu không chính xác", success: false });
     }
     if (validEmail && match) {
       const token = jwt.sign(
@@ -63,7 +63,7 @@ export const login = async (req, res) => {
         { expiresIn: "2h" }
       );
       return res.send({
-        message: "dang nhap thanh cong",
+        message: "đăng nhập thành công",
         success: true,
         token,
       });

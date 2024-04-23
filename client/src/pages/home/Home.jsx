@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/Header";
+import Product from "../../components/product/Product";
 const Home = () => {
+  const [result, setResult] = useState([]);
   return (
     <>
-      <Header />
+      <Header setResult={setResult}/>
+      <Product result={result}/>
     </>
   );
 };
