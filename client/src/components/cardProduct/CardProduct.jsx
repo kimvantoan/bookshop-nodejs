@@ -12,11 +12,11 @@ function CardProduct({product}) {
       <h3 className="mt-4 text-base font-bold text-gray-700">
         {product.bookTitle}
       </h3>
-      <p className="mt-1 text-lg font-medium text-blue-600">
+      <p className="mt-1 text-lg font-medium text-red-600">
         {Intl.NumberFormat("vi-VN", {
           style: "currency",
           currency: "VND",
-        }).format(product.price)}
+        }).format(product?.price?.currentPrice)}
       </p>
     </div>
   );

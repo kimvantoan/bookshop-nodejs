@@ -11,7 +11,7 @@ const Header = ({setResult}) => {
   const [open, setOpen] = useState(false)
   return (
     <div className="flex px-10 py-5 gap-10 relative">
-      <div className="text-4xl font-bold">LOGO</div>
+      <Link to={'/'} className="text-4xl font-bold">LOGO</Link>
       <Search setResult={setResult} />
       <div className="text-center">
         <button>
@@ -31,9 +31,9 @@ const Header = ({setResult}) => {
         </button>
         <div>Tài Khoản</div>
       </div>
-      <div className={`absolute top-20 gap-2 right-5 flex-col items-center ${open ? 'flex' : 'hidden'}`}>
-        <Link to={'/login'} className="px-3 py-1 border-none text-white font-bold bg-blue-500 rounded-md">Đăng Nhập</Link>
-        <Link to={'/signin'} className="border-blue-500 text-blue-500 font-bold rounded-md">Đăng Kí</Link>
+      <div className={`absolute top-20 rounded-md bg-gray-100 p-4 gap-2 right-5 flex-col items-center ${open ? 'flex' : 'hidden'}`}>
+        <Link to={'/login'} className="px-3 py-1 border-2 border-red-500  text-white font-bold bg-red-500 rounded-md">Đăng Nhập</Link>
+        <Link to={'/signin'} className="border-red-500 text-red-500 font-bold rounded-md border-2 px-6 py-1">Đăng Kí</Link>
       </div>
     </div>
   );

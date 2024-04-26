@@ -30,7 +30,7 @@ const Search = ({setResult}) => {
         onChange={handleSearch}
         value={searchQuery}
       />
-      <button className="bg-blue-500 rounded-xl py-1 px-5">
+      <button className="bg-red-500 rounded-xl py-1 px-5">
         <MagnifyingGlassIcon class="h-6 w-6 text-white" />
       </button>
     </div>

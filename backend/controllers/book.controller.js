@@ -2,17 +2,22 @@ import Book from "../models/book.model.js";
 
 export const createBook = async (req, res) => {
   try {
-    const { bookTitle, authorName, description, price:{originalPrice, currentPrice}, imageURL,publish:{publisher,publishDate} ,pageCount,form } =
-      req.body;
+    const {
+      bookTitle,
+      authorName,
+      description,
+      price: { originalPrice, currentPrice },
+      imageURL,
+      publish: { publisher, publishDate },
+      pageCount,
+      form,
+    } = req.body;
     if (!bookTitle) {
       return res.send({ message: "fill out bookTitle", success: false });
     }
     if (!originalPrice) {
       return res.send({ message: "fill out originalPrice", success: false });
     }
-    // if (!currentPrice) {
-    //   return res.send({ message: "fill out currentPrice", success: false });
-    // }
     if (!imageURL) {
       return res.send({ message: "fill out imageURL", success: false });
     }
@@ -20,11 +25,11 @@ export const createBook = async (req, res) => {
       bookTitle: bookTitle,
       authorName: authorName,
       description: description,
-      price:{originalPrice,currentPrice},
+      price: { originalPrice, currentPrice },
       imageURL: imageURL,
-      publish:{publisher,publishDate},
-      pageCount:pageCount,
-      form:form
+      publish: { publisher, publishDate },
+      pageCount: pageCount,
+      form: form,
     });
     res.send({ message: "đã thêm một sách mới", success: true });
   } catch (error) {
@@ -54,14 +59,25 @@ export const getSingleBook = async (req, res) => {
 export const updateBook = async (req, res) => {
   try {
     const { id } = req.params;
-    const { bookTitle, authorName, description, price, imageURL } =
-      req.body;
+    const {
+      bookTitle,
+      authorName,
+      description,
+      // price: { originalPrice, currentPrice },
+      imageURL,
+      publish: { publisher, publishDate },
+      pageCount,
+      form,
+    } = req.body;
     await Book.findByIdAndUpdate(id, {
       bookTitle: bookTitle,
       authorName: authorName,
       description: description,
-      price: price,
+      // price: { originalPrice, currentPrice },
       imageURL: imageURL,
+      publish: { publisher, publishDate },
+      pageCount: pageCount,
+      form: form
     });
     res.send({ message: "cập nhật sách thành công", success: true });
   } catch (error) {
