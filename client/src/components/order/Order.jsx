@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Quantity from "../quantity/Quantity";
 import { Link } from "react-router-dom";
+import Quantity from "../quantity/Quantity";
 
 const Order = ({ product }) => {
-  const cartLocalStorage = JSON.parse(localStorage.getItem('cart')|| [])
+  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || [])
   const [cart, setCart] = useState(cartLocalStorage);
   const handleAddtoCart = (product) => {
     const arr = [...cart];
@@ -18,8 +18,6 @@ const Order = ({ product }) => {
     if(data)
     setCart(JSON.parse(data))
   },[])
-  
-    console.log(cart); 
   return (
     <div className="rounded-md bg-white overflow-hidden p-4">
       <div className="flex gap-12">

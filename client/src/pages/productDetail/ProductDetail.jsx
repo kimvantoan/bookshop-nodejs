@@ -5,7 +5,6 @@ import {  useParams } from "react-router-dom";
 import Order from "../../components/order/Order";
 import InforProduct from "../../components/order/InforProduct";
 
-
 export default function ProductDetail() {
   const [product, setProduct] = useState([])
   const { id } = useParams();

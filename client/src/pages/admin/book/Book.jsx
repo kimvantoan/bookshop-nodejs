@@ -55,7 +55,7 @@ const Book = () => {
                   {Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
-                  }).format(book.price)}
+                  }).format(book?.price?.originalPrice)}
                 </p>
               </div>
             </div>
