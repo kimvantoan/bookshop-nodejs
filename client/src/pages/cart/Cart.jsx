@@ -4,14 +4,13 @@ import CartItem from "../../components/cartCpn/CartItem";
 import Billing from "../../components/cartCpn/Billing";
 
 const Cart = () => {
-  const products = JSON.parse(localStorage.getItem("cart"));
-  console.log(products);
+  const Books = JSON.parse(localStorage.getItem("cart"));
   return (
     <Layout>
       <div className="flex items-start px-20 py-10 gap-8 bg-gray-100">
         <div className=" flex gap-4 flex-col w-2/3">
-          {products.map((product) => {
-            return <CartItem product={product} />;
+          {Books.map((Book) => {
+            return <CartItem Book={Book} />;
           })}
         </div>
         <Billing />

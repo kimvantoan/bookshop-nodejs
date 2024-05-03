@@ -13,22 +13,22 @@ const Header = ({setResult}) => {
     <div className="flex px-10 py-5 gap-10 relative">
       <Link to={'/'} className="text-4xl font-bold">LOGO</Link>
       <Search setResult={setResult} />
-      <div className="text-center">
-        <button>
+      <div className="flex flex-col items-center gap-1">
+        <Link>
           <BellIcon class="h-6 w-6 text-gray-500 hover:text-blue-500" />
-        </button>
+        </Link>
         <div>Thông Báo</div>
       </div>
-      <div className="text-center">
-        <button>
+      <div className="flex flex-col items-center gap-1">
+        <Link to={'/cart'}>
           <ShoppingCartIcon class="h-6 w-6 text-gray-500 hover:text-blue-500 " />
-        </button>
+        </Link>
         <div>Giỏ Hàng</div>
       </div>
-      <div className="text-center" >
-        <button>
+      <div className="flex flex-col items-center gap-1" >
+        <Link>
           <UsersIcon class="h-6 w-6 text-gray-500 hover:text-blue-500" onClick={()=>setOpen(!open)}/>
-        </button>
+        </Link>
         <div>Tài Khoản</div>
       </div>
       <div className={`absolute top-20 rounded-md bg-gray-100 p-4 gap-2 right-5 flex-col items-center ${open ? 'flex' : 'hidden'}`}>

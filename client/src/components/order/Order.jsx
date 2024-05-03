@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Quantity from "../quantity/Quantity";
+import { CartContext } from "../../context/CartContex";
 
 const Order = ({ product }) => {
-  const cartLocalStorage = JSON.parse(localStorage.getItem('cart') || [])
-  const [cart, setCart] = useState(cartLocalStorage);
-  const handleAddtoCart = (product) => {
-    const arr = [...cart];
-    setCart([...arr,product]);
-  };
-  useEffect(()=>{
-    localStorage.setItem('cart',JSON.stringify(cart))
-  },[cart])
-
-  useEffect(()=>{
-    const data=localStorage.getItem('cart')
-    if(data)
-    setCart(JSON.parse(data))
-  },[])
+  const {handleAddProduct}=useContext(CartContext)
+  
   return (
     <div className="rounded-md bg-white overflow-hidden p-4">
       <div className="flex gap-12">
@@ -27,7 +15,7 @@ const Order = ({ product }) => {
           </div>
           <div className="flex gap-9 mt-5">
             <button
-              onClick={()=>handleAddtoCart(product)}
+              onClick={()=>handleAddProduct(product)}
               className="py-3 px-6 border-2 border-red-600 text-red-600 font-medium rounded-lg"
             >
               Thêm vào giỏ hàng
