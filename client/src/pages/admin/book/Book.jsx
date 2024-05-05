@@ -47,7 +47,7 @@ const Book = () => {
                 src={book.imageURL}
                 alt=""
               />
-              <div className="min-w-0 flex-auto">
+              <div className="min-w-0 flex flex-col justify-between ">
                 <p className="text-base font-semibold leading-6 text-gray-900">
                   {book.bookTitle}
                 </p>
@@ -55,7 +55,7 @@ const Book = () => {
                   {Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
-                  }).format(book?.price?.originalPrice)}
+                  }).format(book.originalPrice)}
                 </p>
               </div>
             </div>

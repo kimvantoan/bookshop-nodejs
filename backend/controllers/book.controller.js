@@ -6,9 +6,10 @@ export const createBook = async (req, res) => {
       bookTitle,
       authorName,
       description,
-      price: { originalPrice, currentPrice },
+      originalPrice,
       imageURL,
-      publish: { publisher, publishDate },
+      publisher,
+      publishDate,
       pageCount,
       form,
     } = req.body;
@@ -16,18 +17,22 @@ export const createBook = async (req, res) => {
       return res.send({ message: "fill out bookTitle", success: false });
     }
     if (!originalPrice) {
-      return res.send({ message: "fill out originalPrice", success: false });
+      return res.send({ message: "fill out price", success: false });
     }
     if (!imageURL) {
       return res.send({ message: "fill out imageURL", success: false });
+    }
+    if (!publisher) {
+      return res.send({ message: "fill out publisher", success: false });
     }
     await Book.create({
       bookTitle: bookTitle,
       authorName: authorName,
       description: description,
-      price: { originalPrice, currentPrice },
+      originalPrice:originalPrice,
       imageURL: imageURL,
-      publish: { publisher, publishDate },
+      publisher:publisher,
+      publishDate:publishDate,
       pageCount: pageCount,
       form: form,
     });
@@ -63,21 +68,40 @@ export const updateBook = async (req, res) => {
       bookTitle,
       authorName,
       description,
-      // price: { originalPrice, currentPrice },
+      originalPrice,
+      currentPrice,
       imageURL,
-      publish: { publisher, publishDate },
+      publisher,
+      publishDate,
       pageCount,
       form,
     } = req.body;
+    if (!bookTitle) {
+      return res.send({ message: "fill out bookTitle", success: false });
+    }
+    if (!originalPrice) {
+      return res.send({ message: "fill out originalPrice", success: false });
+    }
+    if (!imageURL) {
+      return res.send({ message: "fill out imageURL", success: false });
+    }
+    if (!publisher) {
+      return res.send({ message: "fill out publisher", success: false });
+    }
+    if (!publishDate) {
+      return res.send({ message: "fill out publishDate", success: false });
+    }
     await Book.findByIdAndUpdate(id, {
-      bookTitle: bookTitle,
-      authorName: authorName,
-      description: description,
-      // price: { originalPrice, currentPrice },
-      imageURL: imageURL,
-      publish: { publisher, publishDate },
-      pageCount: pageCount,
-      form: form
+      bookTitle,
+      authorName,
+      description,
+      originalPrice,
+      currentPrice,
+      imageURL,
+      publisher,
+      publishDate,
+      pageCount,
+      form,
     });
     res.send({ message: "cập nhật sách thành công", success: true });
   } catch (error) {

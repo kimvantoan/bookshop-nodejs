@@ -54,18 +54,18 @@ const Order = ({ product }) => {
               {Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
-              }).format(product?.price?.currentPrice)}
+              }).format(product.currentPrice === 0 ? product.originalPrice : product.currentPrice )}
             </div>
-            <s>
+            <s className={`${product.currentPrice === 0 ? "hidden": "inline"}`}>
               {Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
-              }).format(product?.price?.originalPrice)}
+              }).format(product.originalPrice)}
             </s>
-            <div className="font-bold p-1 bg-red-500 text-white rounded-md">
-              {((product?.price?.originalPrice - product?.price?.currentPrice) /
-                product?.price?.originalPrice) *
-                100}
+            <div className={`font-bold p-1 bg-red-500 text-white rounded-md ${product.currentPrice === 0 ? "hidden": "inline"} `} >
+              {-(((product.originalPrice - product.currentPrice) /
+                product.originalPrice) *
+                100).toFixed(0)}
               %
             </div>
           </div>

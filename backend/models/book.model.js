@@ -14,38 +14,34 @@ const bookSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    price: {
-      originalPrice: {
-        type: Number,
-        require: true,
-      },
-      currentPrice:{
-        type:Number,
-        require:true
-      }
+    originalPrice: {
+      type: Number,
+      require: true,
+    },
+    currentPrice: {
+      type: Number,
+      default: 0,
     },
     imageURL: {
       type: String,
       require: true,
     },
-    publish: {
-      publisher: {
-        type: String,
-        require: true,
-      },
-      publishDate: {
-        type: Date,
-        require: true,
-      },
+    publisher: {
+      type: String,
+      require: true,
     },
-    pageCount:{
-      type:Number,
-      default:0
+    publishDate: {
+      type: Date,
+      require: true,
     },
-    form:{
-      type:String,
-      default:""
-    }
+    pageCount: {
+      type: Number,
+      default: 0,
+    },
+    form: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );

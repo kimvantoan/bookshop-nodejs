@@ -1,6 +1,6 @@
 import React from "react";
 
-function CardProduct({Book}) {
+function CardProduct({ Book }) {
   return (
     <div className="p-2 hover:shadow-lg">
       <div className="aspect-h-1 aspect-w-1 w-full h-80 overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7  ">
@@ -16,7 +16,9 @@ function CardProduct({Book}) {
         {Intl.NumberFormat("vi-VN", {
           style: "currency",
           currency: "VND",
-        }).format(Book?.price?.currentPrice)}
+        }).format(
+          Book.currentPrice === 0 ? Book.originalPrice : Book.currentPrice
+        )}
       </p>
     </div>
   );
