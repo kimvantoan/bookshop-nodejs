@@ -1,6 +1,6 @@
 import React from "react";
 
-const InforProduct = ({product}) => {
+const InforProduct = ({ product }) => {
   return (
     <div className="rounded-md bg-white overflow-hidden px-4 mt-3 ">
       <div className="border-b border-gray-300 py-3">
@@ -19,19 +19,17 @@ const InforProduct = ({product}) => {
             <td>{product.form}</td>
           </tr>
           <tr>
-            <td className="text-gray-500">NXB</td>
-            <td>{product?.publish?.publisher}</td>
+            <td className="text-gray-500">Nhà xuất bản</td>
+            <td>{product.publisher}</td>
           </tr>
           <tr>
-            <td className="text-gray-500">{product?.publish?.publishDate}</td>
-            <td>Vĩ Nhân</td>
+            <td className="text-gray-500">Ngày xuất bản</td>
+            <td>{product.publishDate}</td>
           </tr>
         </table>
       </div>
       <div className="mt-3 py-3">
-        <div className="font-medium ">
-          {product.bookTitle}
-        </div>
+        <div className="font-medium ">{product.bookTitle}</div>
         <div className="font-light">{product.description}</div>
       </div>
     </div>

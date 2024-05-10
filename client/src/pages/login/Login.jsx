@@ -6,19 +6,24 @@ import Layout from "../../components/layout/Layout";
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios
-        .post("http://localhost:2003/auth/login", {
-          email,
-          password,
-        })
+        .post(
+          "http://localhost:2003/auth/login",
+          {
+            email,
+            password,
+          },
+          {
+            withCredentials: true,
+          }
+        )
         .then((res) => {
           if (res.data.success) {
             toast.success(res.data.message);
-            localStorage.setItem("token", res.data.token);
             navigate("/");
           } else {
             toast.error(res.data.message);
@@ -108,7 +113,8 @@ const Login = () => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             You don't have a account{" "}
-            <Link to="/signup"
+            <Link
+              to="/signup"
               href="#"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >

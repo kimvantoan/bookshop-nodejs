@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BellIcon,
   ShoppingCartIcon,
@@ -6,34 +6,94 @@ import {
 } from "@heroicons/react/24/outline";
 import Search from "../search/Search";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import { BuildingLibraryIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
 
-const Header = ({setResult}) => {
-  const [open, setOpen] = useState(false)
+const Header = () => {
+  const [role, setRole] = useState("");
+  const [name, setName] = useState("");
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const decode = jwtDecode(token);
+      setRole(decode.role);
+      setName(decode.name);
+    }
+  }, []);
+
+  const handleLogOut = () => {
+    location.reload(true);
+    Cookies.remove("token");
+  };
+
+  const [open, setOpen] = useState(false);
   return (
-    <div className="flex px-10 py-5 gap-10 relative">
-      <Link to={'/'} className="text-4xl font-bold">LOGO</Link>
-      <Search setResult={setResult} />
+    <div className={`flex px-10 py-5 relative justify-between`}>
+      <Link to={"/"} className="text-4xl font-bold">
+        LOGO
+      </Link>
+      <Search role={role} />
       <div className="flex flex-col items-center gap-1">
         <Link>
           <BellIcon class="h-6 w-6 text-gray-500 hover:text-blue-500" />
         </Link>
         <div>Thông Báo</div>
       </div>
+      {role ? (
+        <div className="flex flex-col items-center gap-1">
+          <Link to={"/dashBoard"}>
+            <BuildingLibraryIcon class="h-6 w-6 text-gray-500" />
+          </Link>
+          <div>Dash Board</div>
+        </div>
+      ) : (
+        ""
+      )}
       <div className="flex flex-col items-center gap-1">
-        <Link to={'/cart'}>
+        <Link to={"/cart"}>
           <ShoppingCartIcon class="h-6 w-6 text-gray-500 hover:text-blue-500 " />
         </Link>
         <div>Giỏ Hàng</div>
       </div>
-      <div className="flex flex-col items-center gap-1" >
+      <div className="flex flex-col items-center gap-1">
         <Link>
-          <UsersIcon class="h-6 w-6 text-gray-500 hover:text-blue-500" onClick={()=>setOpen(!open)}/>
+          <UsersIcon
+            class="h-6 w-6 text-gray-500 hover:text-blue-500"
+            onClick={() => setOpen(!open)}
+          />
         </Link>
-        <div>Tài Khoản</div>
+        <div>{name ? name : "Tài khoản"}</div>
       </div>
-      <div className={`absolute top-20 rounded-md bg-gray-100 p-4 gap-2 right-5 flex-col items-center ${open ? 'flex' : 'hidden'}`}>
-        <Link to={'/login'} className="px-3 py-1 border-2 border-red-500  text-white font-bold bg-red-500 rounded-md">Đăng Nhập</Link>
-        <Link to={'/signin'} className="border-red-500 text-red-500 font-bold rounded-md border-2 px-6 py-1">Đăng Kí</Link>
+      <div
+        className={`absolute top-20 rounded-md bg-gray-100 p-4 gap-2 right-5 flex-col ${
+          open ? "flex" : "hidden"
+        }`}
+      >
+        {name ? (
+          <button
+            onClick={handleLogOut}
+            className="px-3 py-1 border-2 border-red-500  text-white font-bold bg-red-500 rounded-md"
+          >
+            Đăn xuất
+          </button>
+        ) : (
+          <>
+            <Link
+              to={"/login"}
+              className="px-3 py-1 border-2 border-red-500  text-white font-bold bg-red-500 rounded-md"
+            >
+              Đăng Nhập
+            </Link>
+            <Link
+              to={"/signup"}
+              className="border-red-500 text-red-500 font-bold rounded-md border-2 px-6 py-1"
+            >
+              Đăng Kí
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

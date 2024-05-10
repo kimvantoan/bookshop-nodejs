@@ -14,13 +14,13 @@ export const createBook = async (req, res) => {
       form,
     } = req.body;
     if (!bookTitle) {
-      return res.send({ message: "fill out bookTitle", success: false });
+      return res.send({ message: "fill out name book", success: false });
     }
     if (!originalPrice) {
       return res.send({ message: "fill out price", success: false });
     }
     if (!imageURL) {
-      return res.send({ message: "fill out imageURL", success: false });
+      return res.send({ message: "fill out image", success: false });
     }
     if (!publisher) {
       return res.send({ message: "fill out publisher", success: false });
@@ -77,7 +77,7 @@ export const updateBook = async (req, res) => {
       form,
     } = req.body;
     if (!bookTitle) {
-      return res.send({ message: "fill out bookTitle", success: false });
+      return res.send({ message: "fill out name book", success: false });
     }
     if (!originalPrice) {
       return res.send({ message: "fill out originalPrice", success: false });

@@ -4,7 +4,7 @@ import Quantity from "../quantity/Quantity";
 import { CartContext } from "../../context/CartContex";
 
 const CartItem = ({ Book }) => {
-
+  const {handleRemoveProduct}=useContext(CartContext)
   return (
     <div className="flex bg-white items-center justify-between gap-6 p-3 rounded-lg">
       <input type="checkbox" className="w-5 h-5" />
@@ -18,13 +18,13 @@ const CartItem = ({ Book }) => {
             {Intl.NumberFormat("vi-VN", {
               style: "currency",
               currency: "VND",
-            }).format(Book?.price?.currentPrice)}
+            }).format(Book.currentPrice)}
           </span>
           <s className="text-gray-500 text-sm ml-2">
             {Intl.NumberFormat("vi-VN", {
               style: "currency",
               currency: "VND",
-            }).format(Book?.price?.originalPrice)}
+            }).format(Book.originalPrice)}
           </s>
         </div>
       </div>
@@ -33,10 +33,10 @@ const CartItem = ({ Book }) => {
         {Intl.NumberFormat("vi-VN", {
           style: "currency",
           currency: "VND",
-        }).format(Book?.price?.currentPrice)}
+        }).format(Book.currentPrice)}
       </div>
       <button>
-        <TrashIcon class="h-6 w-6 text-gray-500 cursor-pointer hover:text-red-500 " />
+        <TrashIcon onClick={()=>handleRemoveProduct(Book._id)} class="h-6 w-6 text-gray-500 cursor-pointer hover:text-red-500 " />
       </button>
     </div>
   );

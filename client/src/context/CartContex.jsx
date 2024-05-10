@@ -17,15 +17,18 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(Cart));
   }, [Cart]);
-  console.log("cart:",Cart);
+
 
 
   const handleAddProduct = (product) => {
     setCart(prevCart => [...prevCart, product]);
   };
+  const hanleRemoveProduct = (productId) => {
+    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+  };
   return (
     <CartContext.Provider
-      value={{ Cart, setCart, handleAddProduct }}
+      value={{ Cart, setCart, handleAddProduct,hanleRemoveProduct }}
     >
       {children}
     </CartContext.Provider>

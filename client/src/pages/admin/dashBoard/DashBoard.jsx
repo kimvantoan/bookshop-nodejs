@@ -56,6 +56,12 @@ const Dashboard = () => {
                         >
                           User
                         </Link>
+                        <Link
+                          to="/"
+                          className="rounded-md text-white hover:text-black px-3 py-2 text-sm font-medium"
+                        >
+                          shop
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -153,6 +159,12 @@ const Dashboard = () => {
                     className="rounded-md text-white hover:text-black px-3 py-2 text-sm font-medium"
                   >
                     User
+                  </Link>
+                  <Link
+                    to="/"
+                    className="rounded-md text-white hover:text-black px-3 py-2 text-sm font-medium"
+                  >
+                    Shop
                   </Link>
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Quantity from "../quantity/Quantity";
 import { CartContext } from "../../context/CartContex";
@@ -16,13 +16,13 @@ const Order = ({ product }) => {
           <div className="flex gap-9 mt-5">
             <button
               onClick={()=>handleAddProduct(product)}
-              className="py-3 px-6 border-2 border-red-600 text-red-600 font-medium rounded-lg"
+              className="py-3 px-6 border-2 border-red-500 text-red-500 font-medium rounded-lg hover:bg-red-500 hover:text-white transition-all"
             >
               Thêm vào giỏ hàng
             </button>
             <Link
               to={"/cart"}
-              className="py-3 px-14 border-2 bg-red-600 text-white font-medium rounded-lg"
+              className="py-3 px-14 border-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-700 transition-all"
             >
               Mua Ngay
             </Link>
@@ -33,20 +33,20 @@ const Order = ({ product }) => {
           <div className=" text-2xl">{product.bookTitle}</div>
           <div className="grid grid-cols-2 gap-x-3">
             <div>
-              <span>Nhà cung cấp: </span>
-              <span className="font-bold"></span>
+              <span className="text-gray-700">Nhà cung cấp: </span>
+              <span className="font-semibold"></span>
             </div>
             <div>
-              <span>Nhà xuất bản: </span>
-              <span className="font-bold">{product?.publish?.publisher}</span>
+              <span className="text-gray-700">Nhà xuất bản: </span>
+              <span className="font-semibold">{product.publisher}</span>
             </div>
             <div>
-              <span>Tác giả: </span>
-              <span className="font-bold">{product.authorName}</span>
+              <span className="text-gray-700">Tác giả: </span>
+              <span className="font-semibold">{product.authorName}</span>
             </div>
             <div>
-              <span>Hình thức bìa: </span>
-              <span className="font-bold">{product.form}</span>
+              <span className="text-gray-700">Hình thức bìa: </span>
+              <span className="font-semibold">{product.form}</span>
             </div>
           </div>
           <div className="flex gap-3 items-center">
