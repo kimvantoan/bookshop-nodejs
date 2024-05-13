@@ -19,8 +19,7 @@ const Book = () => {
         .delete(`http://localhost:2003/book/deleteBook/${id}`)
         .then((res) => {
           if (res.data.success) {
-            // toast.success(res.data.message);
-            window.location.reload()
+            window.location.reload();
           } else {
             toast.error(res.data.message);
           }
@@ -38,39 +37,36 @@ const Book = () => {
       >
         New Book
       </Link>
-      <ul role="list" className="divide-y divide-gray-100 px-36">
-        {books.map((book) => (
-          <li className="flex justify-between gap-x-6 py-5">
-            <div className="flex min-w-0 gap-x-4">
-              <img
-                className="h-20 w-16 flex-none  bg-gray-50"
-                src={book.imageURL}
-                alt=""
-              />
-              <div className="min-w-0 flex flex-col justify-between ">
-                <p className="text-base font-semibold leading-6 text-gray-900">
-                  {book.bookTitle}
-                </p>
-                <p className="mt-1 truncate text-sm  leading-5 text-gray-500">
-                  {Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(book.originalPrice)}
-                </p>
-              </div>
-            </div>
-            <div className=" shrink-0 sm:flex sm:flex-row sm:items-end gap-6">
-              <Link to={`/dashBoard/book/updateBook/${book._id}`}>
-                <PencilSquareIcon class="h-8 w-8 text-blue-500 cursor-pointer" />
-              </Link>
-              <TrashIcon
-                onClick={()=>handleDelete(book._id)}
-                class="h-8 w-8 text-red-500 cursor-pointer"
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
+      <table class="table-fixed w-full mt-4">
+        <thead className="bg-gray-200 shadow-lg ">
+          <tr>
+            <th className="py-2">NO.</th>
+            <th>BOOK NAME</th>
+            <th>AUTHOR NAME</th>
+            <th>PRICE</th>
+            <th>EDIT OR MANAGE</th>
+          </tr>
+        </thead>
+        <tbody className=" text-center">
+          {books.map((book, index) => (
+            <tr className={`${index%2===0 ? 'bg-gray-50' : ''}`}>
+              <td className="py-7 text-center font-semibold">{index+1}</td>
+              <td className="text-left">{book.bookTitle}</td>
+              <td>{book.authorName}</td>
+              <td>{book.originalPrice}</td>
+              <td className="flex justify-center gap-4 py-7">
+                <Link to={`/dashBoard/book/updateBook/${book._id}`}>
+                  <PencilSquareIcon class="h-8 w-8 text-blue-500 cursor-pointer" />
+                </Link>
+                <TrashIcon
+                  onClick={() => handleDelete(book._id)}
+                  class="h-8 w-8 text-red-500 cursor-pointer"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };

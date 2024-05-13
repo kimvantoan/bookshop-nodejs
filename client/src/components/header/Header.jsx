@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { BuildingLibraryIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
+
 
 const Header = () => {
   const [role, setRole] = useState("");
@@ -22,9 +22,8 @@ const Header = () => {
       setName(decode.name);
     }
   }, []);
-
   const handleLogOut = () => {
-    location.reload(true);
+    location.replace('/login')
     Cookies.remove("token");
   };
 
