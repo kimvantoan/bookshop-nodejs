@@ -70,7 +70,7 @@ const EditBook = () => {
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-5" action="#" method="POST">
+          <form className="space-y-5" method="POST">
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 Name Book

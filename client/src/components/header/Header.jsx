@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BellIcon,
   ShoppingCartIcon,
@@ -6,27 +6,11 @@ import {
 } from "@heroicons/react/24/outline";
 import Search from "../search/Search";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import { BuildingLibraryIcon } from "@heroicons/react/24/outline";
-
+import { CookieContext } from "../../context/CookieContext";
 
 const Header = () => {
-  const [role, setRole] = useState("");
-  const [name, setName] = useState("");
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      const decode = jwtDecode(token);
-      setRole(decode.role);
-      setName(decode.name);
-    }
-  }, []);
-  const handleLogOut = () => {
-    location.replace('/login')
-    Cookies.remove("token");
-  };
-
+  const { role, name, handleLogOut } = useContext(CookieContext);
   const [open, setOpen] = useState(false);
   return (
     <div className={`flex px-10 py-5 relative justify-between`}>

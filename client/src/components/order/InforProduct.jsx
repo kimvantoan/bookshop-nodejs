@@ -2,7 +2,7 @@ import React from "react";
 
 const InforProduct = ({ product }) => {
   return (
-    <div className="rounded-md bg-white overflow-hidden px-4 mt-3 ">
+    <div className="rounded-md bg-white overflow-hidden px-4 ">
       <div className="border-b border-gray-300 py-3">
         <div className="font-bold text-xl">Thông tin sản phẩm</div>
         <table className="w-1/2 mt-5">

@@ -4,7 +4,6 @@ import axios from "axios";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { UserPlusIcon } from "@heroicons/react/24/outline";
 
 const User = () => {
   const [users, setUser] = useState([]);
@@ -31,7 +30,6 @@ const User = () => {
       console.log(error);
     }
   };
-  console.log(users);
   return (
     <>
       <HeaderAdmin />

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import Quantity from "../quantity/Quantity";
-import { CartContext } from "../../context/CartContex";
+import { CartContext } from "../../context/CartContext";
 
 const CartItem = ({ Book }) => {
-  const {handleRemoveProduct}=useContext(CartContext)
+  const { hanleRemoveProduct } = useContext(CartContext);
   return (
     <div className="flex bg-white items-center justify-between gap-6 p-3 rounded-lg">
       <input type="checkbox" className="w-5 h-5" />
@@ -18,9 +18,15 @@ const CartItem = ({ Book }) => {
             {Intl.NumberFormat("vi-VN", {
               style: "currency",
               currency: "VND",
-            }).format(Book.currentPrice)}
+            }).format(
+              Book.currentPrice === 0 ? Book.originalPrice : Book.currentPrice
+            )}
           </span>
-          <s className="text-gray-500 text-sm ml-2">
+          <s
+            className={`${
+              Book.currentPrice === 0 ? "hidden" : "inline"
+            } text-gray-500 text-sm ml-2 `}
+          >
             {Intl.NumberFormat("vi-VN", {
               style: "currency",
               currency: "VND",
@@ -33,10 +39,12 @@ const CartItem = ({ Book }) => {
         {Intl.NumberFormat("vi-VN", {
           style: "currency",
           currency: "VND",
-        }).format(Book.currentPrice)}
+        }).format(
+          Book.currentPrice === 0 ? Book.originalPrice : Book.currentPrice
+        )}
       </div>
-      <button>
-        <TrashIcon onClick={()=>handleRemoveProduct(Book._id)} class="h-6 w-6 text-gray-500 cursor-pointer hover:text-red-500 " />
+      <button >
+        <TrashIcon onClick={() => hanleRemoveProduct(Book._id)} class="h-6 w-6 text-gray-500 cursor-pointer hover:text-red-500 " />
       </button>
     </div>
   );

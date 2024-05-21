@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRoute from "./routers/auth.route.js";
 import userRoute from "./routers/user.route.js";
 import bookRoute from "./routers/book.route.js";
+import commentRoute from "./routers/comment.route.js";
 dotenv.config();
 const app = express();
 app.use(
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/book", bookRoute);
+app.use("/comment", commentRoute);
 
 connectDB();
 

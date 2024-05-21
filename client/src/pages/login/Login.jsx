@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/layout/Layout";
 const Login = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,7 +23,7 @@ const Login = () => {
         .then((res) => {
           if (res.data.success) {
             toast.success(res.data.message);
-            navigate("/");
+            location.replace('/')
           } else {
             toast.error(res.data.message);
           }
@@ -115,7 +114,6 @@ const Login = () => {
             You don't have a account{" "}
             <Link
               to="/signup"
-              href="#"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Sign up

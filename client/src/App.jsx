@@ -13,11 +13,9 @@ import Book from "./pages/admin/book/Book.jsx";
 import CreateBook from "./components/actionBook/CreateBook.jsx";
 import User from "./pages/admin/user/User.jsx";
 import EditBook from "./components/actionBook/EditBook.jsx";
-import { CartProvider } from "./context/CartContex.jsx";
 const App = () => {
   return (
     <>
-      <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -37,7 +35,6 @@ const App = () => {
         </Routes>
 
         <ToastContainer />
-      </CartProvider>
     </>
   );
 };

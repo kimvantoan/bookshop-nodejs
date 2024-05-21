@@ -18,13 +18,13 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(Cart));
   }, [Cart]);
 
-
-
   const handleAddProduct = (product) => {
     setCart(prevCart => [...prevCart, product]);
   };
+  
   const hanleRemoveProduct = (productId) => {
-    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+    const arr = cartFromLocalStorage.filter(sp=>sp.id!==productId)
+    setCart([...arr])
   };
   return (
     <CartContext.Provider

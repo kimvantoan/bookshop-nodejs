@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Quantity from "../quantity/Quantity";
-import { CartContext } from "../../context/CartContex";
+import { CartContext } from "../../context/CartContext";
 
 const Order = ({ product }) => {
   const {handleAddProduct}=useContext(CartContext)

@@ -29,7 +29,6 @@ const CreateBook = () => {
           form,
         })
         .then((res) => {
-          console.log(res);
           if (res.data.success) {
             toast.success(res.data.message);
             navigate("/dashBoard/book");

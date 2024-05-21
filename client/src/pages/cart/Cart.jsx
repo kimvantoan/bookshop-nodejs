@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../components/layout/Layout";
 import CartItem from "../../components/cartCpn/CartItem";
 import Billing from "../../components/cartCpn/Billing";
-import { CartProvider } from "../../context/CartContex";
+import { CartProvider } from "../../context/CartContext";
 
 const Cart = () => {
   const Books = JSON.parse(localStorage.getItem("cart"));
