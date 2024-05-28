@@ -17,7 +17,7 @@ const Header = () => {
       <Link to={"/"} className="text-4xl font-bold">
         LOGO
       </Link>
-      <Search role={role} />
+      <Search />
       <div className="flex flex-col items-center gap-1">
         <Link>
           <BellIcon class="h-6 w-6 text-gray-500 hover:text-blue-500" />

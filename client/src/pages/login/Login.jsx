@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Layout from "../../components/layout/Layout";
@@ -22,8 +22,7 @@ const Login = () => {
         )
         .then((res) => {
           if (res.data.success) {
-            toast.success(res.data.message);
-            location.replace('/')
+            location.replace("/");
           } else {
             toast.error(res.data.message);
           }

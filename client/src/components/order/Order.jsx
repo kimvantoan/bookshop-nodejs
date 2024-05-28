@@ -1,11 +1,40 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Quantity from "../quantity/Quantity";
+import { CookieContext } from "../../context/CookieContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
 
 const Order = ({ product }) => {
-  const {handleAddProduct}=useContext(CartContext)
-  
+  const { id } = useContext(CookieContext);
+  const {setCart} = useContext(CartContext)
+  const handleAddProduct = async (id, product) => {
+    try {
+      await axios
+        .post("http://localhost:2003/cart/addtocart", {
+          id_user: id,
+          products:[ {
+            id_book: product._id,
+            bookTitle: product.bookTitle,
+            originalPrice: product.originalPrice,
+            currentPrice: product.currentPrice,
+            imageURL: product.imageURL,
+            count:1
+          }],
+        })
+        .then((res) => {
+          if(res.data.success){
+            setCart(res.data.product)
+            toast.success(res.data.message)
+          }else{
+            toast.error(res.data.message)
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="rounded-md bg-white overflow-hidden p-4">
       <div className="flex gap-12">
@@ -15,7 +44,9 @@ const Order = ({ product }) => {
           </div>
           <div className="flex gap-9 mt-5">
             <button
-              onClick={()=>handleAddProduct(product)}
+              onClick={() =>
+                handleAddProduct(id,product)
+              }
               className="py-3 px-6 border-2 border-red-500 text-red-500 font-medium rounded-lg hover:bg-red-500 hover:text-white transition-all"
             >
               Thêm vào giỏ hàng
@@ -54,24 +85,38 @@ const Order = ({ product }) => {
               {Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
-              }).format(product.currentPrice === 0 ? product.originalPrice : product.currentPrice )}
+              }).format(
+                product.currentPrice === 0
+                  ? product.originalPrice
+                  : product.currentPrice
+              )}
             </div>
-            <s className={`${product.currentPrice === 0 ? "hidden": "inline"}`}>
+            <s
+              className={`${product.currentPrice === 0 ? "hidden" : "inline"}`}
+            >
               {Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
               }).format(product.originalPrice)}
             </s>
-            <div className={`font-bold p-1 bg-red-500 text-white rounded-md ${product.currentPrice === 0 ? "hidden": "inline"} `} >
-              {-(((product.originalPrice - product.currentPrice) /
-                product.originalPrice) *
-                100).toFixed(0)}
+            <div
+              className={`font-bold p-1 bg-red-500 text-white rounded-md ${
+                product.currentPrice === 0 ? "hidden" : "inline"
+              } `}
+            >
+              {
+                -(
+                  ((product.originalPrice - product.currentPrice) /
+                    product.originalPrice) *
+                  100
+                ).toFixed(0)
+              }
               %
             </div>
           </div>
           <div className="flex gap-7">
             <div className="text-gray-700 font-medium text-lg">Số lượng:</div>
-            <Quantity />
+            <Quantity Book={product}/>
           </div>
         </div>
       </div>
