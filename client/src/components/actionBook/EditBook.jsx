@@ -13,19 +13,20 @@ const EditBook = () => {
   const [imageURL, setImage] = useState("");
   const [pageCount, setPageCount] = useState("");
   const [form, setForm] = useState("");
-
+  const [file, setfile] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`http://localhost:2003/book/${id}`)
       .then((res) => {
+        console.log(res);
         setNamebook(res.data.bookTitle),
           setAuthor(res.data.authorName),
           setDesc(res.data.description),
           setOriginalPrice(res.data.originalPrice),
           setCurrentPrice(res.data.currentPrice),
-          setImage(res.data.imageURL);
+          setfile(res.data.imageURL);
         setPublisher(res.data.publisher);
         setPublishDate(res.data.publishDate);
         setPageCount(res.data.pageCount);
@@ -33,21 +34,23 @@ const EditBook = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+  console.log(imageURL);
   const handleUpdate = async (e) => {
+    const formData = new FormData();
+    formData.append("bookTitle", bookTitle);
+    formData.append("authorName", authorName);
+    formData.append("description", description);
+    formData.append("originalPrice", originalPrice);
+    formData.append("publisher", publisher);
+    formData.append("publishDate", publishDate);
+    formData.append("imageURL", imageURL);
+    formData.append("pageCount", pageCount);
+    formData.append("form", form);
     e.preventDefault();
     try {
       await axios
-        .put(`http://localhost:2003/book/updateBook/${id}`, {
-          bookTitle,
-          authorName,
-          description,
-          originalPrice,
-          currentPrice,
-          imageURL,
-          publisher,
-          publishDate,
-          pageCount,
-          form,
+        .put(`http://localhost:2003/book/updateBook/${id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res) => {
           if (res.data.success) {
@@ -60,6 +63,10 @@ const EditBook = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleFileChange = (e) => { 
+    const image = e.target.files[0];
+    setImage(image);
   };
   return (
     <>
@@ -183,6 +190,7 @@ const EditBook = () => {
                   onChange={(e) => {
                     setPublishDate(e.target.value);
                   }}
+                  
                   placeholder="publishDate"
                   className="block w-full rounded-md border-0 px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -196,13 +204,11 @@ const EditBook = () => {
                 <input
                   id="image"
                   name="image"
-                  type="text"
-                  value={imageURL}
-                  onChange={(e) => {
-                    setImage(e.target.value);
-                  }}
+                  type="file"
+                  onChange={handleFileChange}
                   className="block w-full rounded-md border-0 px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+                <img className="w-2/3 h-40" src={`/images/${file}`} alt="" />
               </div>
             </div>
             <div>

@@ -40,7 +40,7 @@ const Order = ({ product }) => {
       <div className="flex gap-12">
         <div className="flex flex-col items-center">
           <div className="w-2/3">
-            <img src={product.imageURL} alt="" className="w-full" />
+            <img src={`http://localhost:2003/images/${product.imageURL}`} alt="" className="w-full" />
           </div>
           <div className="flex gap-9 mt-5">
             <button

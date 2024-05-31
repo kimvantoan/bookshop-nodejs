@@ -13,20 +13,24 @@ const CreateBook = () => {
   const [imageURL, setImage] = useState("");
   const [pageCount, setPageCount] = useState("");
   const [form, setForm] = useState("");
+  
+  const formData=new FormData()
+  formData.append('bookTitle',bookTitle)
+  formData.append('authorName',authorName)
+  formData.append('description',description)
+  formData.append('originalPrice',originalPrice)
+  formData.append('publisher',publisher)
+  formData.append('publishDate',publishDate)
+  formData.append('imageURL',imageURL)
+  formData.append('pageCount',pageCount)
+  formData.append('form',form)
+
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
       await axios
-        .post("http://localhost:2003/book/createBook", {
-          bookTitle,
-          authorName,
-          description,
-          originalPrice,
-          publisher,
-          publishDate,
-          imageURL,
-          pageCount,
-          form,
+        .post("http://localhost:2003/book/createBook", formData,{
+          headers:{'Content-Type':'multipart/form-data'}
         })
         .then((res) => {
           if (res.data.success) {
@@ -160,12 +164,11 @@ const CreateBook = () => {
             </label>
             <div className="mt-2">
               <input
-                id="image"
-                name="image"
-                type="text"
-                value={imageURL}
+                
+                name="imageURL"
+                type="file"
                 onChange={(e) => {
-                  setImage(e.target.value);
+                  setImage(e.target.files[0]);
                 }}
                 className="block w-full rounded-md border-0 px-1 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />

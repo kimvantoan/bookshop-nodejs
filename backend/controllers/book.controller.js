@@ -1,4 +1,5 @@
 import Book from "../models/book.model.js";
+import fs from 'fs'
 
 export const createBook = async (req, res) => {
   try {
@@ -7,12 +8,12 @@ export const createBook = async (req, res) => {
       authorName,
       description,
       originalPrice,
-      imageURL,
       publisher,
       publishDate,
       pageCount,
       form,
     } = req.body;
+    const imageURL=req.file.filename
     if (!bookTitle) {
       return res.send({ message: "fill out name book", success: false });
     }
@@ -70,12 +71,18 @@ export const updateBook = async (req, res) => {
       description,
       originalPrice,
       currentPrice,
-      imageURL,
       publisher,
       publishDate,
       pageCount,
       form,
     } = req.body;
+    const book= await Book.findById(id)
+    let imageURL=''
+    if(req.file){
+      imageURL=req.file.filename
+    }else{
+      imageURL=book.imageURL
+    }
     if (!bookTitle) {
       return res.send({ message: "fill out name book", success: false });
     }
@@ -112,6 +119,9 @@ export const updateBook = async (req, res) => {
 export const deleteBook = async (req, res) => {
   try {
     const { id } = req.params;
+    const book= await Book.findById(id)
+    const filepath=`./public/images/${book.imageURL}`
+    fs.unlinkSync(filepath)
     await Book.findByIdAndDelete(id);
     res.send({ message: "xóa sách thành công", success: true });
   } catch (error) {

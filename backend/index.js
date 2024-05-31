@@ -21,6 +21,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static("public"))
 
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
@@ -30,6 +31,5 @@ app.use('/cart',cartRoute)
 connectDB();
 
 app.listen(2003, () => {
-  
   console.log("app is running port 2003");
 });

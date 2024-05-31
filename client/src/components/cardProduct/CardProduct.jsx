@@ -5,7 +5,7 @@ function CardProduct({ Book }) {
     <div className="p-2 hover:shadow-lg">
       <div className="aspect-h-1 aspect-w-1 w-full h-80 overflow-hidden rounded-lg xl:aspect-h-8 xl:aspect-w-7  ">
         <img
-          src={Book?.imageURL}
+          src={`http://localhost:2003/images/${Book?.imageURL}`}
           className="h-full w-full object-cover object-center group-hover:opacity-75"
         />
       </div>

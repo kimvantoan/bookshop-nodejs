@@ -8,7 +8,7 @@ import { BookContext } from "../../../context/BookContext";
 import Search from "../../../components/search/Search";
 const Book = () => {
   const { Books, setBook,Result } = useContext(BookContext);
-  
+
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
