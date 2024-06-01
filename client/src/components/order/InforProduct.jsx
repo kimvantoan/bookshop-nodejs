@@ -1,4 +1,5 @@
 import React from "react";
+import { formatDate } from "../../utils/FormatDate";
 
 const InforProduct = ({ product }) => {
   return (
@@ -24,7 +25,7 @@ const InforProduct = ({ product }) => {
           </tr>
           <tr>
             <td className="text-gray-500">Ngày xuất bản</td>
-            <td>{product.publishDate}</td>
+            <td>{formatDate(product.publishDate)}</td>
           </tr>
         </table>
       </div>

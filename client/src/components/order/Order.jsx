@@ -5,7 +5,7 @@ import { CookieContext } from "../../context/CookieContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
-
+import { formatPrice } from "../../utils/FormatPrice";
 const Order = ({ product }) => {
   const { id } = useContext(CookieContext);
   const {setCart} = useContext(CartContext)
@@ -82,10 +82,7 @@ const Order = ({ product }) => {
           </div>
           <div className="flex gap-3 items-center">
             <div className="text-red-500 text-3xl font-bold">
-              {Intl.NumberFormat("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              }).format(
+              {formatPrice(
                 product.currentPrice === 0
                   ? product.originalPrice
                   : product.currentPrice
@@ -94,10 +91,7 @@ const Order = ({ product }) => {
             <s
               className={`${product.currentPrice === 0 ? "hidden" : "inline"}`}
             >
-              {Intl.NumberFormat("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              }).format(product.originalPrice)}
+              {formatPrice(product.originalPrice)}
             </s>
             <div
               className={`font-bold p-1 bg-red-500 text-white rounded-md ${

@@ -1,4 +1,5 @@
 import React from "react";
+import { formatPrice } from "../../utils/FormatPrice";
 
 function CardProduct({ Book }) {
   return (
@@ -13,10 +14,7 @@ function CardProduct({ Book }) {
         {Book?.bookTitle}
       </h3>
       <p className="mt-1 text-lg font-medium text-red-600">
-        {Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }).format(
+        {formatPrice(
           Book.currentPrice === 0 ? Book.originalPrice : Book.currentPrice
         )}
       </p>

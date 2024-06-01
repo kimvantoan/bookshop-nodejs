@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BookContext } from "../../../context/BookContext";
 import Search from "../../../components/search/Search";
+import {formatPrice} from '../../../utils/FormatPrice'
 const Book = () => {
   const { Books, setBook,Result } = useContext(BookContext);
 
@@ -57,7 +58,7 @@ const Book = () => {
               <td className="py-7 text-center font-semibold">{index + 1}</td>
               <td className="text-left">{book.bookTitle}</td>
               <td>{book.authorName}</td>
-              <td>{book.originalPrice}</td>
+              <td>{formatPrice(book.originalPrice)}</td>
               <td className="flex justify-center gap-4 py-7">
                 <Link to={`/dashBoard/book/updateBook/${book._id}`}>
                   <PencilSquareIcon class="h-8 w-8 text-blue-500 cursor-pointer" />
