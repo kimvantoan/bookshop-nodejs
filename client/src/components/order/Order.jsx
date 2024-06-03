@@ -8,27 +8,29 @@ import { CartContext } from "../../context/CartContext";
 import { formatPrice } from "../../utils/FormatPrice";
 const Order = ({ product }) => {
   const { id } = useContext(CookieContext);
-  const {setCart} = useContext(CartContext)
+  const { setCart } = useContext(CartContext);
   const handleAddProduct = async (id, product) => {
     try {
       await axios
         .post("http://localhost:2003/cart/addtocart", {
           id_user: id,
-          products:[ {
-            id_book: product._id,
-            bookTitle: product.bookTitle,
-            originalPrice: product.originalPrice,
-            currentPrice: product.currentPrice,
-            imageURL: product.imageURL,
-            count:1
-          }],
+          products: [
+            {
+              id_book: product._id,
+              bookTitle: product.bookTitle,
+              originalPrice: product.originalPrice,
+              currentPrice: product.currentPrice,
+              imageURL: product.imageURL,
+              count: 1,
+            },
+          ],
         })
         .then((res) => {
-          if(res.data.success){
-            setCart(res.data.product)
-            toast.success(res.data.message)
-          }else{
-            toast.error(res.data.message)
+          if (res.data.success) {
+            setCart(res.data.product);
+            toast.success(res.data.message);
+          } else {
+            toast.error(res.data.message);
           }
         });
     } catch (error) {
@@ -40,13 +42,15 @@ const Order = ({ product }) => {
       <div className="flex gap-12">
         <div className="flex flex-col items-center">
           <div className="w-2/3">
-            <img src={`http://localhost:2003/images/${product.imageURL}`} alt="" className="w-full" />
+            <img
+              src={`http://localhost:2003/images/${product.imageURL}`}
+              alt=""
+              className="w-full"
+            />
           </div>
           <div className="flex gap-9 mt-5">
             <button
-              onClick={() =>
-                handleAddProduct(id,product)
-              }
+              onClick={() => handleAddProduct(id, product)}
               className="py-3 px-6 border-2 border-red-500 text-red-500 font-medium rounded-lg hover:bg-red-500 hover:text-white transition-all"
             >
               Thêm vào giỏ hàng
@@ -107,10 +111,6 @@ const Order = ({ product }) => {
               }
               %
             </div>
-          </div>
-          <div className="flex gap-7">
-            <div className="text-gray-700 font-medium text-lg">Số lượng:</div>
-            <Quantity Book={product}/>
           </div>
         </div>
       </div>

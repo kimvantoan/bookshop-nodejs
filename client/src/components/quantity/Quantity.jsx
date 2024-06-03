@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Quantity = ({Book}) => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(Book.count);
   const handleMinus = () => {
     if (count > 1) setCount(count - 1);
   };
@@ -16,7 +16,7 @@ const Quantity = ({Book}) => {
       >
         -
       </button>
-      <div>{Book.count?Book.count:count}</div>
+      <div>{count}</div>
       <button onClick={handlePlus} className="font-bold text-gray-400 text-2xl">
         +
       </button>

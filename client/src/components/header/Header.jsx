@@ -55,12 +55,17 @@ const Header = () => {
         }`}
       >
         {name ? (
+          <>
           <button
             onClick={handleLogOut}
             className="px-3 py-1 border-2 border-red-500  text-white font-bold bg-red-500 rounded-md"
           >
             Đăn xuất
           </button>
+            <Link to={'/changePassword'} className="px-3 py-1 border-2 border-red-500  text-red-500 font-bold bg-white rounded-md">
+              Đổi mật khẩu
+            </Link>
+          </>
         ) : (
           <>
             <Link

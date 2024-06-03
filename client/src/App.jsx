@@ -15,6 +15,7 @@ import User from "./pages/admin/user/User.jsx";
 import EditBook from "./components/actionBook/EditBook.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import { BookProvider } from "./context/BookContext.jsx";
+import ChangePassword from "./pages/changePassword/ChangePassword.jsx";
 const App = () => {
   return (
     <>
@@ -25,6 +26,7 @@ const App = () => {
 
         <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/changePassword" element={<ChangePassword />} />
         
         <Route path="/cart" element={<Cart />} />
         

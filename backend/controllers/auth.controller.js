@@ -76,3 +76,44 @@ export const logout=(req,res)=>{
   res.clearCookie("token")
   res.send({success:true})
 }
+
+export const changePassword=async(req,res)=>{
+  try {
+    const {email,oldPassword,newPassword,confirmPassword}=req.body
+    if(!email){
+      return res.send({message:"điền vào email",success:false})
+    }
+    if(!oldPassword){
+      return res.send({message:"điền vào oldPassword",success:false})
+    }
+    if(!newPassword){
+      return res.send({message:"điền vào newPassword",success:false})
+    }
+    if(!confirmPassword){
+      return res.send({message:"điền vào confirmPassword",success:false})
+    }
+    const validEmail = await Users.findOne({ email: email });
+    if (!validEmail) {
+      return res.send({
+        message: "tài khoản chưa được đăng kí",
+        success: false,
+      });
+    }
+    const match = await bcrypt.compare(oldPassword, validEmail.password);
+    if (!match) {
+      return res.send({ message: "mật khẩu cũ không chính xác", success: false });
+    }
+    if(newPassword!==confirmPassword){
+      return res.send({message:"lỗi mật khẩu mới",success:false})
+    }
+    const saltRounds = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(newPassword, saltRounds);
+    await Users.findByIdAndUpdate(validEmail._id,{
+      password:hashed
+    })
+    res.send({message:"đổi mật khẩu thành công",success:true})
+  } catch (error) {
+    console.log(error);
+    return res.send({ message: "something is wrong", success: false });
+  }
+}
