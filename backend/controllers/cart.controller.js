@@ -15,9 +15,9 @@ export const getAll = async (req, res) => {
 };
 
 export const addCart = async (req, res) => {
-  var cartFind;
-  const { id_user, products } = req.body;
   try {
+    var cartFind;
+    const { id_user, products } = req.body;
     cartFind = await Cart.findOne({ id_user: id_user });
     if (!id_user) {
       return res.send({ success: false, message: "Hãy đăng nhập" });

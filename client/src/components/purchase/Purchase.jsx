@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Quantity from "../quantity/Quantity";
 import { CookieContext } from "../../context/CookieContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CartContext } from "../../context/CartContext";
 import { formatPrice } from "../../utils/FormatPrice";
-const Order = ({ product }) => {
+const Purchase = ({ product }) => {
   const { id } = useContext(CookieContext);
   const { setCart } = useContext(CartContext);
   const handleAddProduct = async (id, product) => {
@@ -118,4 +117,4 @@ const Order = ({ product }) => {
   );
 };
 
-export default Order;
+export default Purchase;

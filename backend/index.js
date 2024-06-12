@@ -8,6 +8,7 @@ import userRoute from "./routers/user.route.js";
 import bookRoute from "./routers/book.route.js";
 import commentRoute from "./routers/comment.route.js";
 import cartRoute from "./routers/cart.route.js";
+import orderRoute from "./routers/order.route.js";
 dotenv.config();
 const app = express();
 app.use(
@@ -28,6 +29,7 @@ app.use("/user", userRoute);
 app.use("/book", bookRoute);
 app.use("/comment", commentRoute);
 app.use('/cart',cartRoute)
+app.use('/order',orderRoute)
 connectDB();
 
 app.listen(2003, () => {

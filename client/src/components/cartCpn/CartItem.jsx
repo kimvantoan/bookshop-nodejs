@@ -31,9 +31,9 @@ const CartItem = ({ Book }) => {
   return (
     <div className="flex bg-white items-center justify-between gap-6 p-3 rounded-lg">
       <input type="checkbox" className="w-5 h-5" />
-      <div className="w-1/4 h-1/4">
+      <div className="w-1/6">
         <img
-          className="w-fit"
+          className=""
           src={`http://localhost:2003/images/${Book?.imageURL}`}
           alt=""
         />
